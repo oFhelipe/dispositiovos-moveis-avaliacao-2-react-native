@@ -1,11 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, StatusBar } from 'react-native';
+import EntradaDeDados from './src/Components/EntradaDeDados';
+import ExibeVacinas from './src/Components/ExibeVacinas';
 
 export default function App() {
+
+  const [vacinas, setVacinas] = useState([])
+
+  function handleRegister(lote, desc, fabricante) {
+    const vacina  = {
+      lote,
+      desc,
+      fabricante
+    }
+    setVacinas([...vacinas, vacina])
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <EntradaDeDados handleRegister={handleRegister}/>
+      <ExibeVacinas vacinas={vacinas}/>
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +28,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 });
